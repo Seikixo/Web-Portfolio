@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-error: #b02500;
+  --color-surface-tint: #6f5900;
+  --color-on-tertiary: #f3f3f3;
+  --color-error-dim: #b92902;
+  --color-on-tertiary-fixed-variant: #6d6d6d;
+  --color-surface-bright: #f6f6f6;
+  --color-primary-dim: #614d00;
+  --color-on-tertiary-container: #626262;
+  --color-surface-container-highest: #dbdddd;
+  --color-surface-container-high: #e1e3e3;
+  --color-on-surface: #2d2f2f;
+  --color-tertiary-fixed-dim: #f1f1f1;
+  --color-on-error-container: #520c00;
+  --color-primary-fixed: #fed01b;
+  --color-surface-container: #e7e8e8;
+  --color-outline-variant: #acadad;
+  --color-on-secondary-fixed: #3f3f3f;
+  --color-surface-container-low: #f0f1f1;
+  --color-on-primary-fixed: #433500;
+  --color-background: #f6f6f6;
+  --color-inverse-primary: #fed01b;
+  --color-surface-variant: #dbdddd;
+  --color-tertiary-dim: #4f4f4f;
+  --color-primary-container: #fed01b;
+  --color-primary: #6f5900;
+  --color-on-background: #2d2f2f;
+  --color-secondary-container: #e2e2e2;
+  --color-on-tertiary-fixed: #505050;
+  --color-tertiary: #5b5b5b;
+  --color-tertiary-container: #ffffff;
+  --color-on-primary-container: #594700;
+  --color-on-primary: #fff2d3;
+  --color-surface: #f6f6f6;
+  --color-surface-dim: #d3d5d5;
+  --color-error-container: #f95630;
+  --color-on-error: #ffefec;
+  --color-surface-container-lowest: #ffffff;
+  --color-inverse-on-surface: #9c9d9d;
+  --color-secondary: #5b5b5b;
+  --color-on-secondary: #f3f3f3;
+  --color-outline: #767777;
+  --color-primary-fixed-dim: #eec200;
+  --color-secondary-dim: #4f4f4f;
+  --color-on-secondary-fixed-variant: #5b5b5b;
+  --color-tertiary-fixed: #ffffff;
+  --color-on-secondary-container: #525252;
+  --color-inverse-surface: #0c0f0f;
+  --color-on-primary-fixed-variant: #645000;
+  --color-secondary-fixed-dim: #d4d4d4;
+  --color-on-surface-variant: #5a5c5c;
+  --color-secondary-fixed: #e2e2e2;
+  --color-caution-yellow: #facc15;
+
+  --font-headline: "Lexend", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-default: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-full: 9999px;
+
+  @keyframes blink {
+    from,
+    to {
+      border-color: var(--color-black);
+    }
+    50% {
+      border-color: transparent;
+    }
+  }
+  /* Thinner border on mobile, thicker on desktop */
+  --animate-cursor: blink 0.8s step-end infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Use a media query if the cursor feels too thick on mobile */
+@media (max-width: 768px) {
+  .animate-cursor {
+    border-right-width: 4px;
   }
 }
 
+@utility neo-shadow {
+  box-shadow: 8px 8px 0px 0px #000000;
+}
+
+@utility neo-shadow-sm {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+@utility neo-shadow-hover {
+  &:hover {
+    box-shadow: 12px 12px 0px 0px #000000;
+    transform: translate(-4px, -4px);
+  }
+}
+
+@utility neo-shadow-active {
+  &:active {
+    box-shadow: 0px 0px 0px 0px #000000;
+    transform: translate(4px, 4px);
+  }
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@utility carousel-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+/* CSS Tooltip via data-tooltip attribute */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  padding: 4px 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 50;
+}
+
+[data-tooltip]::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 50;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
 }
