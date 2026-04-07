@@ -28,6 +28,7 @@ import cert1 from "@/assets/cert1.jpg";
 import cert2 from "@/assets/cert2.png";
 import cert3 from "@/assets/cert3.jpg";
 import cert4 from "@/assets/cert4.jpg";
+import Link from "next/link";
 
 const certificates = [
   { name: "cert1", image: cert1 },
@@ -148,7 +149,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="lg:col-span-4 hidden lg:block">
+          <div className="lg:col-span-4 block">
             <div className="hero-image-box border-8 border-black bg-surface-container-lowest p-4 neo-shadow rotate-3 relative overflow-hidden">
               <Image src={profile} alt="Hero Image" width={800} height={600} />
               <div className="absolute inset-0 border-4 border-black pointer-events-none"></div>
@@ -289,9 +290,11 @@ export default function Home() {
             <Button buttonType="white" className="cursor-pointer">
               Initiate Contact
             </Button>
-            <Button buttonType="black" className="cursor-pointer">
-              View Resume
-            </Button>
+            <Link href="/benedicto-resume.pdf" download="benedicto-resume.pdf">
+              <Button buttonType="black" className="cursor-pointer">
+                View Resume
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
