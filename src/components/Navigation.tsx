@@ -15,9 +15,9 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 flex flex-wrap justify-between items-center w-full px-4 md:px-6 py-4 bg-[#f6f6f6] border-b-4 border-black  transition-colors duration-300">
-      <div className="text-xl md:text-2xl font-black text-black  uppercase italic">
-        <Link href="/">DEV FITZ</Link>
+    <nav className="sticky top-0 z-50 flex flex-wrap justify-between items-center w-full px-4 md:px-28 py-4 bg-[#f6f6f6] border-b-4 border-black  transition-colors duration-300">
+      <div className="text-xl font-headline md:text-2xl font-black text-black  uppercase italic">
+        <Link href="/">IT FITZ</Link>
       </div>
 
       {/* Mobile Menu Toggle Button */}
@@ -60,10 +60,6 @@ export default function Navigation() {
         })}
       </div>
 
-      <button className="hidden md:block bg-primary-container text-black border-4 border-black px-4 lg:px-6 py-2 font-headline font-bold uppercase tracking-tighter neo-shadow-sm neo-shadow-active">
-        LET'S BUILD
-      </button>
-
       {/* Mobile Links */}
       {isOpen && (
         <div className="flex md:hidden flex-col w-full mt-4 gap-4 pt-4 p-8 border-t-2 border-black animate-in slide-in-from-top-2 duration-200">
@@ -87,9 +83,6 @@ export default function Navigation() {
               </Link>
             );
           })}
-          <button className="bg-primary-container text-black border-4 border-black px-6 py-3 font-headline font-bold uppercase tracking-tighter neo-shadow-sm neo-shadow-active active:translate-x-1 active:translate-y-1 active:shadow-none transition-all mt-4">
-            LET'S BUILD
-          </button>
         </div>
       )}
     </nav>

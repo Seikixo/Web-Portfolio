@@ -7,12 +7,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import Link from "next/link";
+import Button from "../_components/button";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
 
 export default function About() {
   const container = useRef<HTMLElement>(null);
+
+  const email = "vaughnfitz27@gmail.com";
+  const subject = encodeURIComponent("Project Inquiry");
+  const body = encodeURIComponent("Hi, I saw your portfolio and...");
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
 
   useGSAP(
     () => {
@@ -223,7 +231,7 @@ export default function About() {
               <p className="text-lg md:text-xl leading-relaxed font-body mt-4 md:mt-6">
                 The journey continued with{" "}
                 <strong className="bg-blue-200 px-2 py-1 border-2 border-black uppercase text-sm md:text-base align-middle inline-block -rotate-1">
-                  Webee Labs
+                  Born Digital
                 </strong>
                 , where I leveled up my expertise in crafting bulletproof
                 digital experiences. At the end of the day, I don't just write
@@ -243,9 +251,11 @@ export default function About() {
             TOGETHER?
           </h2>
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <button className="bg-black text-white border-4 border-black px-12 py-5 font-headline font-black uppercase text-xl neo-shadow-hover neo-shadow-active">
-              INITIATE CONTACT
-            </button>
+            <Link href={gmailUrl} className="cursor-pointer">
+              <Button buttonType="white" className="cursor-pointer">
+                Initiate Contact
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

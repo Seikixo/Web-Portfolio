@@ -66,28 +66,43 @@ const experiences = [
   {
     date: "August 2025 - Present",
     title: "Web Developer",
-    comp: "Webee Labs",
+    comp: "Born Digital",
     type: "Contract",
+    slug: "born",
   },
   {
     date: "April 2025 - July 2025",
     title: "Web Developer",
     comp: "Backride Palawan",
     type: "Freelance",
+    slug: "backride",
   },
   {
     date: "February 2024 - May 2024",
     title: "Intern",
     comp: "Jairosoft Inc.",
     type: "Full-Time",
+    slug: "jairo",
   },
 ];
+
+const companyBackgroundColor = {
+  born: "bg-blue-200",
+  backride: "bg-green-200",
+  jairo: "bg-gray-200",
+};
+
+type JobType = keyof typeof companyBackgroundColor;
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const container = useRef<HTMLElement>(null);
+  const email = "vaughnfitz27@gmail.com";
+  const subject = encodeURIComponent("Project Inquiry");
+  const body = encodeURIComponent("Hi, I saw your portfolio and...");
 
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
   useGSAP(
     () => {
       // 1. Text slamming down
@@ -254,10 +269,12 @@ export default function Home() {
           {experiences.map((job, idx) => (
             <div
               key={idx}
-              className="border-4 border-black bg-surface-container-low p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-surface-container transition-colors"
+              className={`border-4 border-black flex flex-col p-6 md:flex-row justify-between items-start md:items-center gap-4 transition-colors ${
+                companyBackgroundColor[job.slug as JobType] || "bg-gray-500"
+              }`}
             >
               <div>
-                <span className="font-label font-bold text-primary block mb-2">
+                <span className="font-label font-bold text-black block mb-2">
                   {job.date}
                 </span>
                 <h4 className="font-headline font-black text-2xl uppercase">
@@ -265,7 +282,7 @@ export default function Home() {
                 </h4>
                 <p className="font-body text-on-surface-variant">{job.comp}</p>
               </div>
-              <div className="bg-black text-white px-4 py-2 font-label font-bold uppercase text-xs">
+              <div className=" text-black text-xl px-4 py-2 font-label font-bold uppercase">
                 {job.type}
               </div>
             </div>
@@ -287,9 +304,11 @@ export default function Home() {
             Open for high-impact collaborations and technical consultancy.
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button buttonType="white" className="cursor-pointer">
-              Initiate Contact
-            </Button>
+            <Link href={gmailUrl} className="cursor-pointer">
+              <Button buttonType="white" className="cursor-pointer">
+                Initiate Contact
+              </Button>
+            </Link>
             <Link href="/benedicto-resume.pdf" download="benedicto-resume.pdf">
               <Button buttonType="black" className="cursor-pointer">
                 View Resume
