@@ -159,9 +159,11 @@ export default function Home() {
               No blurs. Just solid output.
             </p>
             <div className="hero-element inline-block">
-              <Button buttonType="primary" className="cursor-pointer">
-                LET'S BUILD
-              </Button>
+              <Link href={gmailUrl} className="cursor-pointer">
+                <Button buttonType="primary" className="cursor-pointer">
+                  LET'S BUILD
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="lg:col-span-4 block">
